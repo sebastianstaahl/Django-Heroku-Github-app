@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
+def login(response):
+	return render(response, "herokuapp/login.html", {})
+
+def home(response):
+	return render(response, "herokuapp/home.html", {})
