@@ -1,9 +1,10 @@
 {% extends 'herokuapp/base.html' %}
 
 {% block title %}
-Login
+	Session 
 {% endblock %}
 
 {% block content %}
-<h1> Login Page </h1>
+{% csrf_token %}
+<h1> Session </h1>
 {% endblock %}
