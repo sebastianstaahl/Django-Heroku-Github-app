@@ -3,15 +3,16 @@
 {% block title %} Callback {% endblock %}
 
 {% block content %}
-{% csrf_token %}
 <h1> Callback </h1>
-<form>
-	<select name="repos" id="repos">
-		{% for key, value in repos.items %}
-		<option value={{key}}>{{key}}</option>
+<form method="post" action="/linkedrepo/">
+	{% csrf_token %}
+	<select name="name" id="name">
+		{% for repo in names %}
+		<option value={{repo}}>{{repo}}</option>
 		{% endfor %}
 	</select>
 	<br><br>
-	<button formaction="/loggedin">Select</button>
+	<input type="submit" value="Submit"/>
+	<!-- <button formaction="/startpage">Select</button> -->
 </form>
 {% endblock %}

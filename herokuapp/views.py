@@ -3,6 +3,9 @@ from django.http import HttpResponse, HttpRequest
 import requests
 from django.template import RequestContext, Template
 import json
+from .forms import MyForm
+from .models import SelectedRepository
+from django.contrib import messages
 
 
 # Create your views here.
@@ -42,13 +45,34 @@ def callback(response, name):
     response4 = requests.get('https://api.github.com/user/repos', headers=headers)
     print("RESPONSE 4: ", response4.json())
     data = response4.json()
-    repos = {}
+    print("TYPE OF DATA: ", type(data))
+    repos = list()
+    context = {}
+    my_form = MyForm()
+
     for repo in data:
-        repos[repo['name']] = repo
+        key = repo['name']
+        #repos[key] = repo
+        repos.append(key)
 
-    for key, value in repos.items():
-        print("key: ", key)
+    context['names'] = repos
+    context['form'] = my_form
 
-    # SHOULD I SAVE TO MODEL AND IMPORT THE MODEL IN THE VIEW?
+    return render(response, "herokuapp/callback.html", context)
 
-    return render(response, "herokuapp/callback.html", {"repos":repos})
+def linkedrepo(request):
+
+    if request.method=="POST":
+        print("POST")
+        if request.POST.get('name'):
+            savename = SelectedRepository()
+            savename.name = request.POST.get('name')
+            print("SAVENAME: ", savename)
+            print("TYPE: ", type(savename))
+            savename.save()
+            messages.success(request, 'Selected repo saved successfully!')            
+    
+    context ={}
+    context['name'] = savename.name
+
+    return render(request, "herokuapp/linkedrepo.html", context)
