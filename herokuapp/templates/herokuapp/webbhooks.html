@@ -3,6 +3,9 @@
 {% block title %} Callback {% endblock %}
 
 {% block content %}
-{% csrf_token %}
 <h1> WebbHooks </h1>
+	<form method="post" class="form-group">
+		{% csrf_token %}
+	</form>
+
 {% endblock %}
