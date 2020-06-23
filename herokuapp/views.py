@@ -112,7 +112,7 @@ def linkedrepo(request):
 def webbhooks(request):
     if request.method=="POST":
         payload = PayLoad()
-        payload.payload = request
+        payload.payload = request.body
         payload.save()
         context = {}
         context['payload'] = payload.payload
