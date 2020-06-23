@@ -118,12 +118,9 @@ def linkedrepo(request):
     return render(request, "herokuapp/linkedrepo.html", context)
 
 def webbhooks(response):
-    print("WEBB HOOK RESPONSE: ", response)
-
     payload = PayLoad()
     payload.payload = response.body
     payload.save()
-
     context = {}
     context['payload'] = payload.payload
     return render(response, "herokuapp/webbhooks.html", context)
@@ -132,7 +129,7 @@ def webbhooks(response):
 def listofhooks(response):
     context = {}
     payloads = list()
-    for item in Payload.objects.all():
+    for item in PayLoad.objects.all():
         payloads.append(item.payload)
     context['list'] = payloads
 
