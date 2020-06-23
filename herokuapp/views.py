@@ -120,11 +120,11 @@ def linkedrepo(request):
 def webbhooks(request):
     if request.method=="POST":
         payload = PayLoad()
-        payload.payload = request.body
+        payload.payload = request
         payload.save()
         context = {}
         context['payload'] = payload.payload
-    return render(response, "herokuapp/webbhooks.html", context)
+    # return render(response, "herokuapp/webbhooks.html", context)
 
 
 def listofhooks(response):
