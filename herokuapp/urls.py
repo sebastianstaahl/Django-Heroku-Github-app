@@ -7,6 +7,7 @@ path("loggedin/", views.loggedin, name="Logged in"),
 path("session", views.session, name="Session"),
 path("startpage/", views.startpage, name="Start page"),
 path("linkedrepo/", views.linkedrepo, name="Linked Repo"),
-path("webbhooks/", views.webbhooks, name="WebbHooks"),
+path("webbhooks/", views.webbhooks, name="Web Hooks"),
+path("listofhooks/", views.listofhooks, name="List of hooks"),
 re_path(r'callback?(?P<name>.*)$', views.callback, name="Callback"),
 ]
