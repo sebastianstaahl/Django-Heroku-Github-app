@@ -6,6 +6,7 @@ import json
 from .forms import MyForm
 from .models import SelectedRepository, AccessToken, UserName, PayLoad
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
