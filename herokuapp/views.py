@@ -121,7 +121,7 @@ def webbhooks(response):
     print("WEBB HOOK RESPONSE: ", response)
 
     payload = PayLoad()
-    payload.payload = response
+    payload.payload = response.data
     payload.save()
 
     context = {}
