@@ -104,7 +104,7 @@ def linkedrepo(request):
     }
 
     # Hittade inge merge webhook event.
-    hook = {'config':{'url':'http://willandskill.herokuapp.com/webbhooks'}, 'events':['push','pull_request']}
+    hook = {'config':{'url':'http://willandskill.herokuapp.com/webbhooks', 'content_type'='json'}, 'events':['push','pull_request']}
     url = 'https://api.github.com/repos/' + username + '/' + repo.name + '/hooks'
     response = requests.post(url, json=hook, headers=headers)
     print("HOOK RESPONSE: ", response)
@@ -118,12 +118,13 @@ def linkedrepo(request):
     return render(request, "herokuapp/linkedrepo.html", context)
 
 def webbhooks(request):
-    payload = PayLoad()
-    payload.payload = request.body
-    payload.save()
-    # context = {}
-    # context['payload'] = payload.payload
-    # return render(response, "herokuapp/webbhooks.html", context)
+    if request.method=="POST":
+        payload = PayLoad()
+        payload.payload = request.body
+        payload.save()
+        context = {}
+        context['payload'] = payload.payload
+    return render(response, "herokuapp/webbhooks.html", context)
 
 
 def listofhooks(response):
