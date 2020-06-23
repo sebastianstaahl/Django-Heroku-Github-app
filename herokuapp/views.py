@@ -4,7 +4,7 @@ import requests
 from django.template import RequestContext, Template
 import json
 from .forms import MyForm
-from .models import SelectedRepository, AccessToken, UserName
+from .models import SelectedRepository, AccessToken, UserName, PayLoad
 from django.contrib import messages
 
 
@@ -117,6 +117,13 @@ def linkedrepo(request):
 
 def webbhooks(response):
     print("WEBB HOOK RESPONSE: ", response)
+
+    payload = PayLoad()
+    payload.payload = response.text
+    payload.save()
+
     context = {}
-    context['response'] = response
+    context['payload'] = payload.payload
     return render(response, "herokuapp/webbhooks.html", context)
+
+
