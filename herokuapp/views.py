@@ -109,6 +109,7 @@ def linkedrepo(request):
 
     return render(request, "herokuapp/linkedrepo.html", context)
 
+@csrf_exempt
 def webbhooks(request):
     if request.method=="POST":
         payload = PayLoad()
