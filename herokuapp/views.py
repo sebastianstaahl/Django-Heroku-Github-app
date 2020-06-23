@@ -119,7 +119,7 @@ def linkedrepo(request):
 
 def webbhooks(response):
     print("WEBB HOOK RESPONSE: ", response)
-    return HttpResponse(response)
+
     payload = PayLoad()
     payload.payload = response
     payload.save()
