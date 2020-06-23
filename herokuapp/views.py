@@ -108,7 +108,8 @@ def linkedrepo(request):
     url = 'https://api.github.com/repos/' + username + '/' + repo.name + '/hooks'
     response = requests.post(url, json=hook, headers=headers)
     print("HOOK RESPONSE: ", response)
-    print("HOOK RESPONSE TEXT: ", response.text)
+    print("HOOK RESPONSE TYPE: ", type(response))
+    print("HOOK RESPONSE TEXT: ", response.content)
 
     AccessToken.objects.all().delete()
     SelectedRepository.objects.all().delete()
@@ -119,7 +120,7 @@ def webbhooks(response):
     print("WEBB HOOK RESPONSE: ", response)
 
     payload = PayLoad()
-    payload.payload = response.text
+    payload.payload = response.content
     payload.save()
 
     context = {}
