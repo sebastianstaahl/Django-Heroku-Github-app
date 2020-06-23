@@ -117,7 +117,6 @@ def linkedrepo(request):
 
 def webbhooks(response):
     print("WEBB HOOK RESPONSE: ", response)
-    print("WEBB HOOK RESPONSE: ", response.text)
     context = {}
     context['response'] = response
     return render(response, "herokuapp/webbhooks.html", context)
