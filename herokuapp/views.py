@@ -117,11 +117,10 @@ def linkedrepo(request):
 
     return render(request, "herokuapp/linkedrepo.html", context)
 
-def webbhooks(response):
+def webbhooks(request):
     payload = PayLoad()
-    payload.payload = response.body
+    payload.payload = request.body
     payload.save()
-    return 
     # context = {}
     # context['payload'] = payload.payload
     # return render(response, "herokuapp/webbhooks.html", context)
