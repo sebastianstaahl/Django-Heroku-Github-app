@@ -39,4 +39,16 @@ def callback(response, name):
     response3 = requests.get('https://api.github.com/user', headers=headers)
     print("RESPONSE 3: ", response3.json())
 
-    return render(response, "herokuapp/callback.html", {})
+    response4 = requests.get('https://api.github.com/user/repos', headers=headers)
+    print("RESPONSE 4: ", response4.json())
+    data = response4.json()
+    repos = {}
+    for repo in data:
+        repos[repo['name']] = repo
+
+    for key, value in repos.items():
+        print("key: ", key)
+
+    # SHOULD I SAVE TO MODEL AND IMPORT THE MODEL IN THE VIEW?
+
+    return render(response, "herokuapp/callback.html", {"repos":repos})
