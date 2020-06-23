@@ -113,12 +113,13 @@ def linkedrepo(request):
 
     AccessToken.objects.all().delete()
     SelectedRepository.objects.all().delete()
+    UserName.objects.all().delete()
 
     return render(request, "herokuapp/linkedrepo.html", context)
 
 def webbhooks(response):
     print("WEBB HOOK RESPONSE: ", response)
-
+    return HttpResponse(response)
     payload = PayLoad()
     payload.payload = response
     payload.save()
