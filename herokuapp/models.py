@@ -15,3 +15,9 @@ class AccessToken(models.Model):
 	def __str__(self):
 		return self.token
 
+class UserName(models.Model):
+	username = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.username
+
