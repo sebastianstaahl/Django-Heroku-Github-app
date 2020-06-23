@@ -54,18 +54,13 @@ def callback(response, name):
     response4 = requests.get('https://api.github.com/user/repos', headers=headers)
     print("RESPONSE 4: ", response4.json())
     data = response4.json()
-    # print("TYPE OF DATA: ", type(data))
     repos = list()
-    # users = list()
     context = {}
     my_form = MyForm()
 
     for repo in data:
         key = repo['name']
-        # user = repo['owner']['login']
-        #repos[key] = repo
         repos.append(key)
-        # users.append(user)
 
     context['names'] = repos
     context['form'] = my_form
@@ -107,9 +102,6 @@ def linkedrepo(request):
     hook = {'config':{'url':'http://willandskill.herokuapp.com/webbhooks/', 'content_type':'json'}, 'events':['push','pull_request']}
     url = 'https://api.github.com/repos/' + username + '/' + repo.name + '/hooks'
     response = requests.post(url, json=hook, headers=headers)
-    print("HOOK RESPONSE: ", response)
-    print("HOOK RESPONSE TYPE: ", type(response))
-    print("HOOK RESPONSE TEXT: ", response.content)
 
     AccessToken.objects.all().delete()
     SelectedRepository.objects.all().delete()
