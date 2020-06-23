@@ -124,7 +124,7 @@ def webbhooks(request):
         payload.save()
         context = {}
         context['payload'] = payload.payload
-    return render(response, "herokuapp/webbhooks.html", context)
+    return HttpResponse('<p>success</p>')
 
 
 def listofhooks(response):
