@@ -116,7 +116,7 @@ def webbhooks(request):
         payload.save()
         context = {}
         context['payload'] = payload.payload
-    return True
+    return HttpResponse('<p>success</p>')
 
 
 def listofhooks(response):
