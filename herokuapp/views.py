@@ -4,7 +4,7 @@ import requests
 from django.template import RequestContext, Template
 import json
 from .forms import MyForm
-from .models import SelectedRepository
+from .models import SelectedRepository, AccessToken
 from django.contrib import messages
 
 
@@ -32,6 +32,10 @@ def callback(response, name):
     access_token = str(response2.text)[13:-36]
     print(access_token)
 
+    token_db = AccessToken()
+    token_db.token = access_token
+    token_db.save()
+
     access_token = 'token ' + access_token
     print(access_token)
 
@@ -57,6 +61,7 @@ def callback(response, name):
 
     context['names'] = repos
     context['form'] = my_form
+    context['data'] = data
 
     return render(response, "herokuapp/callback.html", context)
 
@@ -69,10 +74,16 @@ def linkedrepo(request):
             savename.name = request.POST.get('name')
             print("SAVENAME: ", savename)
             print("TYPE: ", type(savename))
+            print("ID: ", type(savename.id))
             savename.save()
-            messages.success(request, 'Selected repo saved successfully!')            
+            messages.success(request, 'Selected repo saved successfully!')
     
     context ={}
     context['name'] = savename.name
+
+    token = AccessToken.objects.all()[0].token
+    print("TOKEN: ", token)
+    print("TYPE TOKEN: ", type(token))
+    AccessToken.objects.all().delete()
 
     return render(request, "herokuapp/linkedrepo.html", context)
