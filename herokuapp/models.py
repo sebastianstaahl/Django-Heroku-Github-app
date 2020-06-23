@@ -22,7 +22,7 @@ class UserName(models.Model):
 		return self.username
 
 class PayLoad(models.Model):
-	payload = models.CharField(max_length=100000)
+	payload = models.CharField(max_length=1000000)
 
 	def __str__(self):
 		return self.payload
