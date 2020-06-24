@@ -125,6 +125,7 @@ STATIC_ROOT =  os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "/startpage/"
+LOGOUT_REDIRECT_URL = "/login/"
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Extra lookup directories for collectstatic to find static files
